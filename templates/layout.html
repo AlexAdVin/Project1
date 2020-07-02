@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    </head>
+    {% include "includes/_message.html" %}
+    <body>
+        <nav class="nav nav-dark bg-dark">
+            <a class="nav-link active" href="/">Home</a>
+
+            {% if session.log %}
+            <a class="nav-link" href="/photo">Photo</a>
+            <a class="nav-link" href="/logout">Logout</a>
+
+            {% else %}
+            <a class="nav-link" href="/register">Register</a>
+            <a class="nav-link" href="/login">Login</a>
+            {% endif %}
+        </nav>
+
+        <div class="container">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

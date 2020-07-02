@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Index{% endblock %}</title>
+        <link rel="stylesheet" href="../static/style.css">
+    </head>
+    {% include "includes/_message.html" %}
+
+    <body>
+        <nav class="nav nav-dark bg-dark">
+            <a class="nav-link active" href="/">Home</a>
+
+            {% if session.log %}
+            <a class="nav-link" href="/photo">Photo</a>
+            <a class="nav-link" href="/logout">Logout</a>
+
+            {% else %}
+            <a class="nav-link" href="/register">Register</a>
+            <a class="nav-link" href="/login">Login</a>
+            {% endif %}
+        </nav>
+
+        <div class="container">
+            <h1>Sustainability is
+                <span class="txt-type" data-wait="2000" data-words='["what we all want", "here to stay."]'></span>
+            </h1>
+            <h2>Welcome to the sustainable world!</h2>
+            {% block body %}
+            {% endblock %}
+        </div>
+
+        <script src="../main.js"></script>
+    </body>
+
+</html>
