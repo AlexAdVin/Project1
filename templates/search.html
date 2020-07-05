@@ -6,35 +6,49 @@
     <p>Search for a book here:</p>
 
     <form method="POST">
-
+        {% if message %}
+            <p class="message">{{ message | safe }}</p>
+        {% endif %}
         <div class="form-group">
+
             <input
             type="text"
             autofocus="autofocus"  
             class="form-control" 
             name="search_string" 
             placeholder="Search here..">
+            <br>
+            <div class="form-group">
+                <button class="btn btn-primary">Search book</button>
+            </div>
+
+            <!-- 
             <input
+            class="btn btn-primary"
             type="submit"
             formaction="/search"
-            value="Search">
+            value="Search book">
+            -->
+
         </div>
 
-        <div class="form-group">
-            <button class="btn btn-primary">Search book</button>
-        </div>
     </form>
 
-
+    {% for result in results %}
         <ul>
-            {% for result in results %}
-                <li>
-                    <a>
-                        {{ result.title }}
-                    </a>
-                </li>
-            {% endfor %}
+            <li>
+                Title: <a href="{{ url_for('details', result_id=result.id) }}">  
+                    {{ result.title }} 
+                </a> <hr>
+                ISBN: <a> {{ result.isbn }} </a><br> 
+                Author: <a> {{ result.author }} </a> <br>
+                Year: <a>  {{ result.year }} </a> <br>
+            </li>
         </ul>
+    {% else %}
+        <h2>No such book. Try again. :-)</h2>
+    {% endfor %}
+
 
 
 {% endblock %}

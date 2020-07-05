@@ -8,11 +8,51 @@
     <h1>Book Details</h1>
 
     <ul>
-        <li>ISBN: {{ book.isbn }}</li>
-        <li>Title: {{ book.title }}</li>
-        <li>Author: {{ book.author}}</li>
-        <li>Published Year: {{ book.year}}</li>
+        <li>Title: {{ book.title }}</li> <hr>
+        ISBN: <a> {{ book.isbn }} </a><br> 
+        Author: <a> {{ book.author }} </a> <br>
+        Year: <a>  {{ book.year }} </a> <br>
     </ul>
 
+    <div class="form-group">
+        <a href="{{ url_for('search') }}">
+            <button class="btn btn-primary">
+                Back to search
+            </button>
+        </a>
+    </div>
+
+    <form action="{{ url_for('submit', book_id=book.id) }}" method="POST">
+
+        <div class="form-group">
+            <h3>Rate your favourite book</h3>
+
+            <input type="radio" name="ratings" value="1" /> 1
+            <input type="radio" name="ratings" value="2" > 2
+            <input type="radio" name="ratings" value="3" /> 3
+            <input type="radio" name="ratings" value="4" > 4
+            <input type="radio" name="ratings" value="5" checked> 5
+        </div>
+
+        <div class="form-group">
+            <h3>Comment on your rating</h3>
+
+            <br>
+            <textarea 
+            rows="10" 
+            cols="30" 
+            name="comments" 
+            placeholder="Enter text here...">
+            </textarea>
+
+            <br>
+            <a href="{{ url_for('submit', book_id=book.id) }}">
+                <button class="btn btn-primary">
+                    Submit review
+                </button>
+            </a>
+        </div>
+
+    </form>
 
 {% endblock %}

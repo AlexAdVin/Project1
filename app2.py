@@ -34,13 +34,23 @@ def search():
         search = "%{}%".format(search_value)
         print(search)
         results = Books.query.filter(or_(Books.title.like(search),
-                            Books.author.like(search))).all()
+                            Books.author.like(search),
+                            Books.isbn.like(search))).all()
         #results = db.execute("SELECT * FROM books WHERE title LIKE search").fetchall()
         print(results)
         #if titledata is None:
         #    flash("The book does not exist", "danger")
         #    return render_template("search.html")
     return render_template('search.html', results=results)
+
+@app.route("/search/<int:result_id>")
+def details(result_id):
+    """List details about a chosen book."""
+
+    book = Books.query.get(result_id)
+    print(book)
+
+    return render_template('book.html', book=book)
 
 
 if __name__ == '__main__':
